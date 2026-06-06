@@ -225,17 +225,13 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const submit = async () => {
+  const submit = () => {
     setSubmitting(true)
-    try {
-      await fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(answers),
-      })
-    } catch {
-      // 通知失敗してもユーザー体験は止めない
-    }
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(answers),
+    }).catch(() => {})
     setDone(true)
   }
 
