@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const LABELS: Record<string, string> = {
+  cw_username: 'CWユーザー名',
   q1: 'Q1. 年代',
   q2: 'Q2. 性別',
   q3: 'Q3. お仕事の状況',

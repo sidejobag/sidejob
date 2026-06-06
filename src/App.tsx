@@ -4,6 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 const ACCENT = '#673AB7'
 
 type Answers = {
+  cw_username: string
   q1: string
   q2: string
   q3: string
@@ -18,6 +19,7 @@ type Answers = {
 }
 
 const initial: Answers = {
+  cw_username: '',
   q1: '', q2: '', q3: '', q4: '', q5: '', q6: [],
   q7: '', q8: '', q9: [], q10: '', q11: '',
 }
@@ -191,6 +193,7 @@ export default function App() {
   const validate = (): boolean => {
     const e: Partial<Record<keyof Answers, string>> = {}
     if (section === 0) {
+      if (!answers.cw_username.trim()) e.cw_username = '入力してください'
       if (!answers.q1) e.q1 = '選択してください'
       if (!answers.q2) e.q2 = '選択してください'
       if (!answers.q3) e.q3 = '選択してください'
@@ -268,6 +271,21 @@ export default function App() {
         {/* セクション1 */}
         {section === 0 && (
           <>
+            <div className="mb-6">
+              <p className="text-sm font-medium text-gray-800 mb-2">
+                クラウドワークスのユーザー名
+                <span className="ml-1 text-red-500 text-xs">*必須</span>
+              </p>
+              <input
+                type="text"
+                placeholder="例：yamada_taro"
+                value={answers.cw_username}
+                onChange={e => setAnswers(a => ({ ...a, cw_username: e.target.value }))}
+                className="w-full px-4 py-3 rounded-lg border text-sm text-gray-800 outline-none"
+                style={{ borderColor: errors.cw_username ? '#EF4444' : '#E5E7EB' }}
+              />
+              {errors.cw_username && <p className="mt-1.5 text-xs text-red-500">{errors.cw_username}</p>}
+            </div>
             <QuestionBlock label="Q1. 年代" error={errors.q1}>
               {['10代', '20代', '30代', '40代', '50代以上'].map(v => (
                 <Radio key={v} name="q1" value={v} checked={answers.q1 === v} onChange={() => setRadio('q1')(v)} label={v} />
