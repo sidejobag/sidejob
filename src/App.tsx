@@ -157,8 +157,8 @@ function Checkbox({
   )
 }
 
-function QuestionBlock({ label, required, error, children }: {
-  label: string; required?: boolean; error?: string; children: React.ReactNode
+function QuestionBlock({ label, error, children }: {
+  label: string; error?: string; children: React.ReactNode
 }) {
   return (
     <div className="mb-6">
@@ -272,17 +272,17 @@ export default function App() {
         {/* セクション1 */}
         {section === 0 && (
           <>
-            <QuestionBlock label="Q1. 年代" required error={errors.q1}>
+            <QuestionBlock label="Q1. 年代" error={errors.q1}>
               {['10代', '20代', '30代', '40代', '50代以上'].map(v => (
                 <Radio key={v} name="q1" value={v} checked={answers.q1 === v} onChange={() => setRadio('q1')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q2. 性別" required error={errors.q2}>
+            <QuestionBlock label="Q2. 性別" error={errors.q2}>
               {['男性', '女性', '回答しない'].map(v => (
                 <Radio key={v} name="q2" value={v} checked={answers.q2 === v} onChange={() => setRadio('q2')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q3. 現在のお仕事の状況" required error={errors.q3}>
+            <QuestionBlock label="Q3. 現在のお仕事の状況" error={errors.q3}>
               {['会社員（正社員）', '会社員（契約・派遣・パート）', '自営業・フリーランス', '学生', '主婦・主夫', '現在無職・求職中'].map(v => (
                 <Radio key={v} name="q3" value={v} checked={answers.q3 === v} onChange={() => setRadio('q3')(v)} label={v} />
               ))}
@@ -293,17 +293,17 @@ export default function App() {
         {/* セクション2 */}
         {section === 1 && (
           <>
-            <QuestionBlock label="Q4. クラウドワークスを登録したのはいつ頃ですか？" required error={errors.q4}>
+            <QuestionBlock label="Q4. クラウドワークスを登録したのはいつ頃ですか？" error={errors.q4}>
               {['1ヶ月以内', '半年以内', '1年以内', '1年以上前', 'まだ登録していない・覚えていない'].map(v => (
                 <Radio key={v} name="q4" value={v} checked={answers.q4 === v} onChange={() => setRadio('q4')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q5. これまでに副業で収入を得た経験は？" required error={errors.q5}>
+            <QuestionBlock label="Q5. これまでに副業で収入を得た経験は？" error={errors.q5}>
               {['まだ一度もない', '月1万円未満', '月1〜5万円', '月5〜10万円', '月10万円以上'].map(v => (
                 <Radio key={v} name="q5" value={v} checked={answers.q5 === v} onChange={() => setRadio('q5')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q6. 副業で主にやっている・やりたい分野は？（複数選択可）" required error={errors.q6 as string | undefined}>
+            <QuestionBlock label="Q6. 副業で主にやっている・やりたい分野は？（複数選択可）" error={errors.q6 as string | undefined}>
               {['Webライティング・記事作成', '動画編集', 'デザイン・バナー作成', 'データ入力・事務作業', 'プログラミング・Web制作', 'SNS運用・マーケティング', 'まだ決まっていない・わからない'].map(v => (
                 <Checkbox key={v} id={`q6-${v}`} checked={answers.q6.includes(v)} onChange={() => toggleCheck('q6')(v)} label={v} />
               ))}
@@ -314,22 +314,22 @@ export default function App() {
         {/* セクション3 */}
         {section === 2 && (
           <>
-            <QuestionBlock label="Q7. 副業を始めたい・続けたい一番の理由は？" required error={errors.q7}>
+            <QuestionBlock label="Q7. 副業を始めたい・続けたい一番の理由は？" error={errors.q7}>
               {['収入を増やしたい・生活を楽にしたい', '将来・老後のお金が不安だから', '本業以外のスキルを身につけたい', 'いずれ独立・フリーランスになりたい', '時間や場所に縛られず働きたい'].map(v => (
                 <Radio key={v} name="q7" value={v} checked={answers.q7 === v} onChange={() => setRadio('q7')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q8. 副業で目指したい月収は？" required error={errors.q8}>
+            <QuestionBlock label="Q8. 副業で目指したい月収は？" error={errors.q8}>
               {['月3万円くらい（お小遣い・生活の足し）', '月5〜10万円（しっかりした副収入）', '月10〜30万円（本業並み）', '月30万円以上（独立も視野）', 'まだイメージできていない'].map(v => (
                 <Radio key={v} name="q8" value={v} checked={answers.q8 === v} onChange={() => setRadio('q8')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label="Q9. 副業で今いちばん困っていること・つまずいていることは？（複数選択可）" required error={errors.q9 as string | undefined}>
+            <QuestionBlock label="Q9. 副業で今いちばん困っていること・つまずいていることは？（複数選択可）" error={errors.q9 as string | undefined}>
               {['そもそも何から始めればいいかわからない', '応募しても採用・受注されない', 'ポートフォリオや実績の作り方がわからない', 'プロフィール・提案文の書き方に自信がない', 'どの案件が「優良」か見分けられない', '時間が取れない・続かない', '特に困っていない'].map(v => (
                 <Checkbox key={v} id={`q9-${v}`} checked={answers.q9.includes(v)} onChange={() => toggleCheck('q9')(v)} label={v} />
               ))}
             </QuestionBlock>
-            <QuestionBlock label='Q10. 「副業の悩みを解決できる情報やサポート」があれば知りたいですか？' required error={errors.q10}>
+            <QuestionBlock label='Q10. 「副業の悩みを解決できる情報やサポート」があれば知りたいですか？' error={errors.q10}>
               {['ぜひ知りたい', '内容によっては知りたい', '今は特に必要ない'].map(v => (
                 <Radio key={v} name="q10" value={v} checked={answers.q10 === v} onChange={() => setRadio('q10')(v)} label={v} />
               ))}
@@ -352,7 +352,7 @@ export default function App() {
               </ul>
               <p className="mt-2">さらにご希望の方には、副業で実際に受注できるようになるための情報や、非公開の案件情報も配信しています。</p>
             </div>
-            <QuestionBlock label="Q11. 特典資料の受け取りを希望しますか？" required error={errors.q11}>
+            <QuestionBlock label="Q11. 特典資料の受け取りを希望しますか？" error={errors.q11}>
               {['受け取りたい', '今回は受け取らない'].map(v => (
                 <Radio key={v} name="q11" value={v} checked={answers.q11 === v} onChange={() => setRadio('q11')(v)} label={v} />
               ))}
